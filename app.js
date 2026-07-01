@@ -8,7 +8,7 @@ const puzzles = [
     size: 3,
     initialState: [6, 4, 8, 1, "", 7, 2, 3, 5],
     goalState: [1, 2, 3, 4, 5, 6, 7, "", 8],
-    tileLabels: ["./Images/wolf.jpeg", "./Images/spider.jpeg", "./Images/raven.jpg", "./Images/rat.jpeg", "./Images/butterfly.avif", "./Images/bat.png", "./Images/bear.png", "./Images/elk.png"]
+    tileLabels: ["./Images/wolf.jpg", "./Images/spider.jpg", "./Images/raven.jpg", "./Images/rat.jpg", "./Images/butterfly.jpg", "./Images/bat.jpg", "./Images/bear.jpg", "./Images/elk.jpg"]
   }
 ];
 
