@@ -11,7 +11,20 @@ const puzzles = [
     tileLabels: ["./Images/wolf.jpg", "./Images/spider.jpg", "./Images/raven.jpg", "./Images/rat.jpg", "./Images/butterfly.jpg", "./Images/bat.jpg", "./Images/bear.jpg", "./Images/elk.jpg"],
     solutionText: "The box clicks open",
     incorrectText: null
-  }
+  },
+  {
+    id: "slider-2",
+    type: "slider",
+    title: "Slider Template",
+    description: "Slide tiles to the correct positions.",
+    prompt: "arrange the tiles 1-8 with the blank in the bottom right corner.",
+    size: 3,
+    initialState: [6, 4, 8, 1, "", 7, 2, 3, 5],
+    goalState: [1, 2, 3, 4, 5, 6, 7, 8, ""],
+    tileLabels: [1, 2, 3, 4, 5, 6, 7, 8],
+    solutionText: "correct!",
+    incorrectText: null
+}
 ];
 
 const puzzleList = document.getElementById("puzzle-list");
