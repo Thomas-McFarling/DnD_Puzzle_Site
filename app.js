@@ -24,6 +24,17 @@ const puzzles = [
     tileLabels: [1, 2, 3, 4, 5, 6, 7, 8],
     solutionText: "correct!",
     incorrectText: null
+},
+{
+    id: "quiz-1",
+    type: "quiz",
+    title: "Quiz Template",
+    description: "Input the correct answer.",
+    prompt: "What is the capital of France?",
+    answer: "paris",
+    hint: "It's the city of light.",
+    solutionText: "correct!",
+    incorrectText: null
 }
 ];
 
