@@ -1,6 +1,6 @@
 # D&D Puzzle Vault
 
-This starter site is a simple, Vercel-friendly framework for sharing D&D puzzles with friends.
+This starter site is a simple, Vercel-friendly framework for sharing D&D puzzles for online games. Designed to flow well with Vercel.
 
 ## What is included
 
@@ -17,7 +17,7 @@ Open [app.js](app.js) and add a new object to the `puzzles` array with:
 - `description`
 - `prompt`
 - `answer`
-- `hint`
+- `hint` (optional)
 
 ## Run locally
 
