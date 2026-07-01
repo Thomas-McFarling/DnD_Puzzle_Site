@@ -11,7 +11,7 @@ Open [app.js](app.js) and add a new object to the `puzzles` array with:
 -  `title`
 - `description`
 - `prompt`
-- `answer`
+- `answer` (only for quiz)
 - `hint` (optional)
 - `correctText` (displays when solved) (optional)
 - `incorrectText` (displays on incorrect entry) (optional)
