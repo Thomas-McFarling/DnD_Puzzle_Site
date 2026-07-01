@@ -1,6 +1,6 @@
 # D&D Puzzle Vault
 
-This starter site is a simple, Vercel-friendly framework for sharing D&D puzzles for online games. Designed to flow well with Vercel.
+This starter site is a simple framework for sharing D&D puzzles for online games. Designed to flow well with Vercel.
 
 ## What is included
 

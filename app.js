@@ -4,12 +4,11 @@ const puzzles = [
     type: "slider",
     title: "The Wooden Box",
     description: "Slide wooden tiles until the correct order is restored.",
-    prompt: "Arrange the rune tiles in the correct order. <br><br><strong>Carving:</strong><br><br>My lips I nightly lift toward the silver moon,<br>With trembling strings I weave upon my tiny loom,<br>On wings of ink I glide above the sulking gloom.<br><br>Scuttling through the shadows, in darkness I confide,<br>With daylight's fragile beauty upon my lying eyes,<br>Silent in the cavern's womb, with naught but stars to guide.<br><br>I seek majesty in solitude,<br>I have no truths to hide,<br>My crown yet sits upon my head for all to see with pride.",
-    hint: "",
+    prompt: "Arrange the wooden tiles on the box in the correct order. <br><br><strong>Carving:</strong><br>My lips I nightly lift toward the silver moon,<br>With trembling strings I weave upon my tiny loom,<br>On wings of ink I glide above the sulking gloom.<br><br>Scuttling through the shadows, in darkness I confide,<br>With daylight's fragile beauty upon my lying eyes,<br>Silent in the cavern's womb, with naught but stars to guide.<br><br>I seek majesty in solitude,<br>I have no truths to hide,<br>My crown yet sits upon my head for all to see with pride.",
     size: 3,
     initialState: [6, 4, 8, 1, "", 7, 2, 3, 5],
     goalState: [1, 2, 3, 4, 5, 6, 7, "", 8],
-    tileLabels: ["wolf", "spider", "raven", "rat", "butterfly", "bat", "bear", "elk"]
+    tileLabels: ["./Images/wolf.jpeg", "./Images/spider.jpeg", "./Images/raven.jpg", "./Images/rat.jpeg", "./Images/butterfly.avif", "./Images/bat.png", "./Images/bear.png", "./Images/elk.png"]
   }
 ];
 
@@ -131,12 +130,11 @@ function renderSliderPuzzle(puzzle) {
       <strong>Prompt</strong>
       <p>${puzzle.prompt}</p>
     </div>
+    <p class="message" id="feedback"></p>
     <div class="slider-board" id="slider-board"></div>
     <div class="slider-actions">
       <button type="button" id="reset-slider">Reset</button>
     </div>
-    <p class="message" id="feedback"></p>
-    <p><strong>Hint:</strong> ${puzzle.hint}</p>
   `;
 
   const board = document.getElementById("slider-board");
@@ -166,8 +164,13 @@ function renderSliderBoard(puzzle, state) {
     const tileLabel = puzzle.tileLabels?.[value - 1] ?? value;
     if (value === "") {
       tile.textContent = "";
-    } else if (typeof tileLabel === "string" && (tileLabel.startsWith("http") || tileLabel.startsWith("data:"))) {
-      tile.innerHTML = `<img src="${tileLabel}" alt="Tile ${value}" />`;
+    } else if (typeof tileLabel === "string") {
+      const normalizedPath = tileLabel.replace(/\\/g, "/");
+      if (normalizedPath.startsWith("http") || normalizedPath.startsWith("data:") || normalizedPath.startsWith("./") || normalizedPath.startsWith("/")) {
+        tile.innerHTML = `<img src="${normalizedPath}" alt="Tile ${value}" />`;
+      } else {
+        tile.textContent = tileLabel;
+      }
     } else {
       tile.textContent = tileLabel;
     }
@@ -182,7 +185,7 @@ function renderSliderBoard(puzzle, state) {
         renderSliderBoard(puzzle, nextState);
 
         if (isSolved(puzzle, nextState)) {
-          feedback.textContent = "The arrangement is correct.";
+          feedback.textContent = "The box clicks open.";
           feedback.className = "message success";
         } else {
           feedback.textContent = "";

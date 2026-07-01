@@ -155,7 +155,7 @@ button {
 }
 
 .tile {
-  border: 1px solid var(--border);
+  border: 3px solid var(--border);
   border-radius: 14px;
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: white;
@@ -181,7 +181,7 @@ button {
 }
 
 .tile.movable {
-  border-color: #f8fafc;
+  border-color: #362214;
   box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.3) inset;
 }
 
