@@ -8,7 +8,9 @@ const puzzles = [
     size: 3,
     initialState: [6, 4, 8, 1, "", 7, 2, 3, 5],
     goalState: [1, 2, 3, 4, 5, 6, 7, "", 8],
-    tileLabels: ["./Images/wolf.jpg", "./Images/spider.jpg", "./Images/raven.jpg", "./Images/rat.jpg", "./Images/butterfly.jpg", "./Images/bat.jpg", "./Images/bear.jpg", "./Images/elk.jpg"]
+    tileLabels: ["./Images/wolf.jpg", "./Images/spider.jpg", "./Images/raven.jpg", "./Images/rat.jpg", "./Images/butterfly.jpg", "./Images/bat.jpg", "./Images/bear.jpg", "./Images/elk.jpg"],
+    solutionText: "The box clicks open",
+    incorrectText: null
   }
 ];
 
@@ -185,10 +187,10 @@ function renderSliderBoard(puzzle, state) {
         renderSliderBoard(puzzle, nextState);
 
         if (isSolved(puzzle, nextState)) {
-          feedback.textContent = "The box clicks open.";
+          feedback.textContent = puzzle.solutionText;
           feedback.className = "message success";
         } else {
-          feedback.textContent = "";
+          feedback.textContent = puzzle.incorrectText || "";
           feedback.className = "message";
         }
       });
