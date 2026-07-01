@@ -101,10 +101,10 @@ function renderQuizPuzzle(puzzle) {
     const expected = puzzle.answer.toLowerCase();
 
     if (input === expected) {
-      feedback.textContent = "Correct. The puzzle is solved.";
+      feedback.textContent = puzzle.solutionText;
       feedback.className = "message success";
     } else {
-      feedback.textContent = "Not quite. Try the hint or think about the wording.";
+      feedback.textContent = puzzle.incorrectText;
       feedback.className = "message error";
     }
   });
