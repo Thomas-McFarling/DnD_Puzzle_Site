@@ -10,7 +10,7 @@ const puzzles = [
     goalState: [1, 2, 3, 4, 5, 6, 7, "", 8],
     tileLabels: ["./Images/wolf.jpg", "./Images/spider.jpg", "./Images/raven.jpg", "./Images/rat.jpg", "./Images/butterfly.jpg", "./Images/bat.jpg", "./Images/bear.jpg", "./Images/elk.jpg"],
     solutionText: "The box clicks open.",
-    incorrectText: ""
+    incorrectText: null
   }),
   new QuizPuzzle({
     id: "quiz-1",

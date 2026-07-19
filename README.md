@@ -1,19 +1,18 @@
 # D&D Puzzle Vault
 
-This starter site is a simple framework for sharing D&D puzzles for online games.
+This site is a simple framework for sharing D&D puzzles for online games.
 
 ## How to add/edit a puzzle
 
-Open [app.js](app.js) and add a new object to the `puzzles` array with:
+Open [app.js](app.js) and add a new object of one of the valid types to the `puzzles` array with:
 
 - `id`
-- `type` (currently supports slider and quiz puzzels)
--  `title`
+- `title`
 - `description`
 - `prompt`
 - `answer` (only for quiz)
 - `hint` (optional)
-- `correctText` (displays when solved) (optional)
+- `correctText` (displays when solved)
 - `incorrectText` (displays on incorrect entry) (optional)
 
 ## If making a sliding puzzle you must also include

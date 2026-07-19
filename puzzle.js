@@ -6,7 +6,7 @@ class Puzzle {
     this.prompt = prompt;
     this.hint = hint;
     this.solutionText = solutionText || "Correct.";
-    this.incorrectText = incorrectText || "Not quite.";
+    this.incorrectText = incorrectText;
   }
 
   renderInList(currentPuzzleId) {
@@ -47,7 +47,8 @@ class QuizPuzzle extends Puzzle {
   }
 
   renderDetails() {
-    return `
+    if(this.hint != null) 
+    {return `
       <h2>${this.title}</h2>
       <p class="detail-body">${this.description}</p>
       <div class="prompt-box">
@@ -61,8 +62,24 @@ class QuizPuzzle extends Puzzle {
       </form>
       <p class="message" id="feedback"></p>
       <p><strong>Hint:</strong> ${this.hint}</p>
-    `;
-  }
+    `;}
+    else 
+    {
+      return `
+        <h2>${this.title}</h2>
+        <p class="detail-body">${this.description}</p>
+        <div class="prompt-box">
+          <strong>Prompt</strong>
+          <p>${this.prompt}</p>
+        </div>
+        <form class="answer-form" id="answer-form">
+          <label for="answer">Enter your answer</label>
+          <input id="answer" name="answer" type="text" autocomplete="off" placeholder="Type your solution" />
+          <button type="submit">Check Answer</button>
+        </form>
+        <p class="message" id="feedback"></p>
+    `;}
+}
 
   attachInteractions() {
     const form = document.getElementById("answer-form");
@@ -199,7 +216,7 @@ class SliderPuzzle extends Puzzle {
           if (this.isSolved(nextState)) {
             feedback.textContent = this.solutionText;
             feedback.className = "message success";
-          } else {
+          } else if (this.incorrectText != null){
             feedback.textContent = this.incorrectText || "";
             feedback.className = "message";
           }
