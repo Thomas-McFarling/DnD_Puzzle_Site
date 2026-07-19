@@ -21,6 +21,12 @@ Open [app.js](app.js) and add a new object of one of the valid types to the `puz
 - `goalState` (target arangement)
 - `titleLabels` (the labels for each tab, can include image links)
 
+## If making an order puzzle you must include
+- `size`
+- `displayOrder` (the order of the buttons)
+- `correctOrder` (the order the buttons must be pressed)
+- `titleLabels` (the text on each button, allows image links)
+
 ## Run locally
 
 Open [index.html](index.html) in a browser, or start a simple local server from this folder.

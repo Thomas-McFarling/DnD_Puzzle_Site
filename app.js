@@ -21,8 +21,18 @@ const puzzles = [
     hint: "It's the city of light.",
     solutionText: "Correct!",
     incorrectText: "Not quite."
-  })
+  }),
 
+  new OrderPuzzle({
+    id: "order-1",
+    title: "Order Template",
+    description: "Press the buttons in the correct order.",
+    prompt: "Click the following items in order of their size:",
+    displayOrder: ["small", "medium", "large"],
+    correctOrder: ["small", "medium", "large"],
+    buttonLabels: ["Small", "Medium", "Large"],
+    hint: null
+  })
 ];
 
 const puzzleList = document.getElementById("puzzle-list");

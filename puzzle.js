@@ -113,8 +113,10 @@ class SliderPuzzle extends Puzzle {
     this.currentState = [...this.initialState];
   }
 
-  renderDetails() {
-    if(this.hint != null) {return `
+  renderDetails() 
+  {
+    if(this.hint != null) 
+    {return `
       <h2>${this.title}</h2>
       <p class="detail-body">${this.description}</p>
       <div class="prompt-box">
@@ -128,9 +130,9 @@ class SliderPuzzle extends Puzzle {
       </div>
       <p><strong>Hint:</strong> ${this.hint}</p>
     `;
-  }
-  else {
-    return `
+    }
+    else 
+    {return `
       <h2>${this.title}</h2>
       <p class="detail-body">${this.description}</p>
       <div class="prompt-box">
@@ -142,9 +144,8 @@ class SliderPuzzle extends Puzzle {
       <div class="slider-actions">
         <button type="button" id="reset-slider">Reset</button>
       </div>
-    `;
+    `;}
   }
-}
 
   isMovable(index, state, size) {
     const emptyIndex = state.indexOf("");
@@ -242,6 +243,141 @@ class SliderPuzzle extends Puzzle {
         feedback.textContent = "";
         feedback.className = "message";
       }
+    });
+  }
+}
+
+class OrderPuzzle extends Puzzle {
+  constructor(options) {
+    super(options);
+    this.size = options.size || 3;
+    this.displayOrder = options.displayOrder;
+    this.correctOrder = options.correctOrder;
+    this.buttonLabels = options.buttonLabels || [];
+    this.pressedOrder = [];
+  }
+
+  renderDetails() {
+    if (this.hint != null) {
+      return `
+        <h2>${this.title}</h2>
+        <p class="detail-body">${this.description}</p>
+        <div class="prompt-box">
+          <strong>Prompt</strong>
+          <p>${this.prompt}</p>
+        </div>
+        <p class="message" id="feedback"></p>
+        <div class="order-board" id="order-board"></div>
+        <div class="slider-actions">
+          <button type="button" id="clear-order">Clear</button>
+        </div>
+        <p><strong>Hint:</strong> ${this.hint}</p>
+      `;
+    }
+
+    return `
+      <h2>${this.title}</h2>
+      <p class="detail-body">${this.description}</p>
+      <div class="prompt-box">
+        <strong>Prompt</strong>
+        <p>${this.prompt}</p>
+      </div>
+      <p class="message" id="feedback"></p>
+      <div class="order-board" id="order-board"></div>
+      <div class="slider-actions">
+        <button type="button" id="clear-order">Clear</button>
+      </div>
+    `;
+  }
+
+  isSolved(state) {
+    if (state.length !== this.correctOrder.length) {
+      return false;
+    }
+
+    return state.every((value, index) => value === this.correctOrder[index]);
+  }
+
+  selectTile(value) {
+    const index = this.pressedOrder.indexOf(value);
+
+    if (index >= 0) {
+      this.pressedOrder.splice(index, 1);
+    } else {
+      this.pressedOrder.push(value);
+    }
+
+    this.renderBoard();
+  }
+
+  attachInteractions() {
+    this.pressedOrder = [];
+    this.renderBoard();
+
+    const clearButton = document.getElementById("clear-order");
+    if (!clearButton) return;
+
+    clearButton.addEventListener("click", () => {
+      this.pressedOrder = [];
+      this.renderBoard();
+
+      const feedback = document.getElementById("feedback");
+      if (feedback) {
+        feedback.textContent = "";
+        feedback.className = "message";
+      }
+    });
+  }
+
+  renderBoard() {
+    const board = document.getElementById("order-board");
+    const feedback = document.getElementById("feedback");
+
+    if (!board || !feedback) return;
+
+    board.innerHTML = "";
+    board.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
+
+    this.displayOrder.forEach((value, index) => {
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "tile";
+      tile.dataset.value = value;
+
+      if (this.pressedOrder.includes(value)) {
+        tile.classList.add("selected");
+      }
+
+      const tileLabel = this.buttonLabels[index] ?? value;
+      if (typeof tileLabel === "string") {
+        const normalizedPath = tileLabel.replace(/\\/g, "/");
+        if (
+          normalizedPath.startsWith("http") ||
+          normalizedPath.startsWith("data:") ||
+          normalizedPath.startsWith("./") ||
+          normalizedPath.startsWith("/")
+        ) {
+          tile.innerHTML = `<img src="${normalizedPath}" alt="Tile ${value}" />`;
+        } else {
+          tile.textContent = tileLabel;
+        }
+      } else {
+        tile.textContent = tileLabel;
+      }
+
+      tile.addEventListener("click", () => {
+        this.selectTile(value);
+      });
+
+      if (this.isSolved(this.pressedOrder)) {
+        feedback.textContent = this.solutionText;
+        feedback.className = "message success";
+      } else if (this.incorrectText != null) {
+        feedback.textContent = this.incorrectText || "";
+        feedback.className = "message";
+      }
+
+      board.appendChild(tile);
     });
   }
 }
